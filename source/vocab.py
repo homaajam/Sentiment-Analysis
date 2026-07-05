@@ -27,6 +27,9 @@ test=[
   ["i", "love", "it"],
   ["it", "was", "amazing"]
 ]
-
+vocab= Vocab() 
+vocab.build_vocab(test)
+print(vocab.encode(["i", "love", "it"]))
+print(vocab.encode(["it", "was", "amazing"]))
     
     
