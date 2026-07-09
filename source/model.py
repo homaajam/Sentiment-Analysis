@@ -2,28 +2,39 @@ import torch
 import torch.nn as nn
 
 class Model(nn.Module):
-  def __init__(self, vocab_size, embed_dem, hidden_dem):
+  def __init__(self, vocab_size, embed_dim, hidden_dim):
     super().__init__()
 
-    self.embedding= nn.embeding(vocab_size, embed_dem)
+    self.embedding= nn.Embedding(vocab_size, embed_dim)
 
     self.biLSTM= nn.LSTM(
-      embed_dem,
-      hidden_dem,
+      embed_dim,
+      hidden_dim,
       batch_first=True,
       bidirectional=True
     )
 
     self.gru= nn.GRU(
-      hidden_dem *2,
-      hidden_dem,
+      hidden_dim *2,
+      hidden_dim,
       batch_first=True
     )
 
     self.dropout= nn.Dropout(0.3)
 
-    self.full_conect= nn.Linear(hidden_dem, 1)
+    self.fc= nn.Linear(hidden_dim, 1)
 
     self.sigmoid= nn.Sigmoid()
 
-  def forward()
+  def forward(self, x):
+    x= self.embedding(x)
+
+    lstm_out, _ = self.biLSTM(x)
+    gru_out, _ = self.gru(lstm_out)
+
+    x= gru_out[:,-1,:]
+    x= self.dropout(x)
+    x= self.fc(x)
+
+    return self.sigmoid(x)
+  

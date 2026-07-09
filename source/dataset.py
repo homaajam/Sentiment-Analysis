@@ -4,12 +4,12 @@ from torch.utils.data import Dataset
 class TextDataset(Dataset):
   def __init__(self, texts, labels, vocab, max_len=100):
     self.texts= texts
-    self.labels=labels
+    self.labels= labels
     self.vocab= vocab
     self.max_len= max_len
   
   def padding(self, seq):
-    if len(seq) < self.max_len :
+    if len(seq) < self.max_len:
       seq += [0] * (self.max_len - len(seq))
     else:
       seq= seq[:self.max_len]
