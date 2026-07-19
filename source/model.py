@@ -20,7 +20,7 @@ class Model(nn.Module):
       batch_first=True
     )
 
-    self.dropout= nn.Dropout(0.3)
+    self.dropout= nn.Dropout(0.5)
 
     self.fc= nn.Linear(hidden_dim, 1)
 
