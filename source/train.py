@@ -9,12 +9,12 @@ def train(model, dataloader, optimizer, criterion, device):
 
     optimizer.zero_grad()
 
-    output= model(x).squeeze
+    output= model(x).squeeze()
 
     loss= criterion(output, y)
     loss.backward()
     optimizer.step()
     total_loss += loss.item()
 
-    return total_loss/len(dataloader)
+  return total_loss/len(dataloader)
 

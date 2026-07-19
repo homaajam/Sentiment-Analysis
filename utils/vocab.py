@@ -20,7 +20,7 @@ class Vocab:
   def encode(self, sentence):
     encoded=[]
     for word in sentence:
-      encoded.append(self.word2indx.get(word, 1))
+      encoded.append(self.word2idx.get(word, 1))
     return encoded
 
     
